@@ -1,0 +1,195 @@
+/* !!!!!! CSS inspiré de vidéos Youtube :
+
+    Design global du projet :
+    --> Coding2Go : https://www.youtube.com/watch?v=ezP4kbOvs_E
+
+    Design des inputs :
+    --> WebKitCoding : https://www.youtube.com/watch?v=Tdzas-IlKSM
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+    color: #f0f0f0;
+}
+
+
+body {
+    min-height: 100vh;
+    background-color: #0b0d15;
+    color : #a2a5b3;
+}
+
+h1{
+    color: white;
+    text-align: center;
+    padding: 40px 0px 80px 0px;
+    font-size: 3em;
+}
+
+.card{
+    margin: 0 auto;
+    padding: 2em;
+    width: 300px;
+    background: #1c1f2b;
+    text-align: left;
+    border-radius: 10px;
+    position:relative;
+}
+
+/*  Permet de créer une animation de dégradé conique sur le background de la carte */
+@property --angle {   /* Définit une variable CSS personnalisée */
+    syntax: '<angle>';  /* Définit la syntaxe de la variable (doit être un angle valide en CSS (par exemple, 0deg, 45deg, 1rad))*/
+    initial-value: 0deg;  /* Définit la valeur initiale de la variable */
+    inherits: false;  /* Indique si la propriété est héritée */
+}
+
+
+
+
+.card::after, .card::before{  /* ::after et ::before permettent de créer des pseudo-éléments */
+
+    /* Les pseudos-éléments permettent d'insérer du contenu avant ou après le contenu réel d'un élément, sans ajouter de nouveaux éléments HTML dans le document. 
+        Ils sont souvent utilisés pour des effets visuels ou des décorations.*/
+
+    content: '';   /* Définit le contenu des pseudo-éléments. 
+                    Ici, il est vide (''), ce qui signifie que les pseudo-éléments n'affichent pas de texte, mais ils existent pour appliquer des styles. */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), transparent 70%, #006aff, #ff4545); /* Crée un dégradé conique. 
+        Le dégradé commence à l'angle défini par la variable CSS personnalisée --angle, et se termine à 360 degrés. 
+        Le dégradé est transparent à 70%, puis passe à la couleur #006aff, puis à la couleur #ff4545. */
+    top: 50%;
+    left: 50%;  
+    translate: -50% -50%; /* Déplace le pseudo-élément de 50% de sa largeur et de sa hauteur vers la gauche et le haut, pour le centrer sur l'élément parent */
+    z-index: -1;
+    padding: 5px;
+    border-radius: 10px;
+    animation: 3s spin linear infinite;  /* Applique une animation nommée spin, qui dure 3 secondes, est linéaire et se répète indéfiniment */
+}
+
+
+
+
+.card::before{   /*Donne l'effet de "luminosité" à l'animation */
+    filter:blur(1.5rem);
+    opacity: 0.5;
+}
+
+/* Crée l'animation spin */
+@keyframes spin {  /* Définit une animation nommée spin */
+    from {         /* Définit le point de départ de l'animation */
+        --angle: 0deg;
+    }
+    to {          /* Définit le point final de l'animation */
+        --angle: 360deg;
+    }
+}
+
+/* ----Input---- */
+.entryArea {
+    position: relative;
+    height: 80px;
+    line-height: 50px;
+}
+
+.inpt {
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    width: 100%;
+    outline: none;
+    font-size: 1.5em;
+    line-height: 45px;
+    border-radius: 5px;
+    border: 2px solid #a2a5b3;
+    background: transparent;
+    color: #a2a5b3;
+    transition: 0.1s ease;  /* transition de 0.1s pour un effet de déplacement fluide */
+    z-index: 2;
+}
+
+.label {
+    position: absolute;
+    font-size: 1em;
+    color: #a2a5b3;
+    padding-left: 10px;
+    background-color: #1c1f2b;
+    transition: 0.1s ease;   /* transition de 0.1s pour un effet de déplacement fluide */
+}
+
+.inpt:focus, .inpt:valid {   /* Lorsque l'input est en focus ou qu'il est valide */
+    color: #f0f0f0;
+    border: 2px solid #f0f0f0;
+}
+
+.inpt:focus + .label,    /* Lorsque l'input est en focus, le label se déplace vers le haut */
+.inpt:valid + .label {   /* Lorsque l'input est valide, le label se déplace vers le haut */
+    color: #f0f0f0;
+    height: 30px;
+    line-height: 30px;   /* Centre le texte verticalement */
+    padding: 0 12px;
+    transform: translate(0, -16px);   /* Déplace le label de 16px vers le haut */
+    z-index: 2;
+}
+
+
+/* ----Bouton---- */
+.button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    padding: 10px 5px;
+    border: 2px solid #a2a5b3;
+    outline: none;  
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    z-index: 0;
+    background-color: transparent;
+    color: #a2a5b3;
+    text-align: left;
+    transition: 0.5s;
+}
+
+.button:hover {
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px #a2a5b3;
+}
+
+.bottom{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+
+}
+
+/* ----Image---- */
+.card img {
+    max-width: 100%;  /* L'image ne dépasse pas la largeur de la carte */
+    max-height: 100%;
+    border-radius: inherit; /* garde les mêmes coins arrondis que la carte */
+  }
+
+
+/* ----Select---- */
+select {
+    font-size: 1em;
+    margin-left: 10px;
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #f0f0f0;
+    border: 2px solid #f0f0f0;
+    cursor: pointer;
+}
+
+option{
+    background: #1c1f2b; 
+    color: #f0f0f0;
+}

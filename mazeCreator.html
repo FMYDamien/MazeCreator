@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- Page d'accueil du projet MazeCreator. 
+        -> Permet de renseigner les informations nécessaires à la création d'un labyrinthe. 
+        -> Redirige vers le fichier de génération du labyrinthe. -->
+
+<head>
+    <meta charset="UTF-8" />
+    <title>MazeCreator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Importation de la police, voir : https://www.oboqo.com/comment-importer-une-police-depuis-google-fonts/ -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" /> 
+    <link rel="stylesheet" href="design.css" /> <!-- Lorsque l'on nomme le fichier CSS 'style.css', il ne semble pas lié.-->
+    <!-- Nous corrigeons ce problème en changeant le nom du fichier CSS (ici en 'design.css'). -->
+    <!-- Nous n'avons pas trouvé la source de ce problème, mais supposons que cela provient de XAMPP. -->
+</head>
+
+<body>
+    <h1>MazeCreator</h1>
+    <form class="card" method="GET" action="mazeGeneration.php">
+    <!-- Formulaire permettant d'obtenir les informations nécessaires à la création du labyrinthe. 
+            -> renvoie vers le fichier de génération.                                               -->
+
+        <div class="entryArea">
+            <input class="inpt" type="number" id="largeur" name="largeur" min="1" max="100" required />
+            <!-- Type number permet d'entrer uniquement des entiers. Min = 1 permet d'éviter les entiers négatifs. 
+                 Nous définissons arbitrairement un maximum de 100 pour éviter les labyrinthes trop volumineux.  -->
+            <div class="label">Nombre de case en largeur</div>
+        </div>
+
+        <div class="entryArea">
+            <input class="inpt" type="number" id="hauteur" name="hauteur" min="1" max="100" required />
+            <div class="label">Nombre de case en hauteur</div>
+        </div>
+
+        <div class="entryArea">
+            <input class="inpt" type="number" id="seed" name="seed" /> <!-- La graine/seed peut être un entier négatif. -->
+            <div class="label">Graine</div>
+        </div>
+
+        <label for="banque">Style des cases :</label>
+        <select id="banque" name="banque" required>
+            <option value="2D_Maze_Tiles_White">White</option>
+            <option value="2D_Maze_Tiles_Red">Red</option>
+            <option value="2D_Maze_Tiles_Halloween">Halloween</option> <!-- Style créé par nos soins -->
+        </select><br /><br />
+
+        <input class="button" type="submit" value="Générer le labyrinthe" />
+    </form>
+</body>
+
+</html>
